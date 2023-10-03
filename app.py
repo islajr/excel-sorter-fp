@@ -44,7 +44,7 @@ def main():
         new_book = openpyxl.Workbook()
         new_sheet = new_book.active
 
-        # search for pattern in file
+        # search for pattern in file and store them
         for rows in range(1, 10001):
             # condition for EOF: Three empty lines in a row.
             if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is None:  # if the iterator comes on
@@ -54,12 +54,13 @@ def main():
 
             # logic for crossing domains
             if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is not None:
-                print(sheet[f"C{rows + 1}"].value)
+                # connector.append([])
+                ...
 
             # accounting for a possible two-line break
-            elif sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is None and sheet[
-                f"C{rows + 2}"].value is not None:
-                print(sheet[f"C{rows + 2}"].value)
+            elif sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is None and sheet[f"C{rows + 2}"].value is not None:
+                # connector.append([])
+                ...
 
             # finding and copying the heading
             if sheet[f"C{rows}"].value is None:
@@ -68,33 +69,32 @@ def main():
                 current = list(sheet[rows])
                 for i in current:
                     current_list.append(i.value)
-                connector.append(current_list)
+
+                # looping through the current list inorder to append its values independently to the connector
+                connector.append([])    # create an empty list to house the heading
+                for i in range(len(current_list)):
+                    connector[0].append(current_list[i])
                 current_list.clear()
 
             # logic for grepping pattern
-            if pattern in sheet[f"C{rows}"].value is None:
-                ...
-            elif pattern in sheet[f"C{rows}"].value:
+            if sheet[f"C{rows}"].value is None:
+                continue
+            elif pattern in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
                 current = list(sheet[rows])
                 for i in current:
                     current_list.append(i.value)
-                connector.append(current_list)
+
+                # looping through the current list inorder to append its values independently to the connector
+                connector.append([])  # create an empty list to house the heading
+                for i in current_list:
+                    connector[len(connector) - 1].append(i)
                 current_list.clear()
 
-        # writing from list to file
-        print(connector)
+        # writing to new file from storage
+        for i in connector:
+            new_sheet.append(i)
 
         new_book.save(f"./output/{pattern}.xlsx")
-
-        # saving to a file
-        # source.save("test.csv")
-
-        # accessing one cell
-        # source.cell(row='', column='', value='')
-        # # or
-        # cell = source['A4'] = 4
-
-        # looping through cells
 
         count = count + 1
 
