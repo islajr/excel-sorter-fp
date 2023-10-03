@@ -8,10 +8,17 @@
 """
 import openpyxl
 import sys
+import re
 
 
 def main():
     count = 0
+
+    # load a workbook
+    source = openpyxl.load_workbook("./src/S4 BALANCES FOR THE MONTH ENDED 30.09.2023.xlsx")
+    sheet = source.active
+
+    # main loop
     while True:
         while count >= 1:
             re_prompt = input("Do you want to continue? (y or n) ")
@@ -31,13 +38,21 @@ def main():
         pattern = input("What do you wish to sort? ")
 
         # input validation
-        pattern.strip()
+        pattern.strip().capitalize()
 
-        # load a workbook
-        source = openpyxl.load_workbook("./NLPC PFA.xlsx")
-        sheet = source.active
+        # search for pattern in file
+        for rows in range(1, 50001):
+            # condition for EOF: Three empty lines in a row.
+            if sheet[f"C{rows}"].value is None:  # if the iterator comes on an empty line
+                if sheet[f"C{rows + 1}"] is None:  # check if the next line is also empty
+                    if sheet[f"C{rows + 2}"] is None:  # check if the following line is also empty.
+                        break  # break out of loop
 
-        # saving to a file        
+            #   logic for grepping pattern
+            if pattern in sheet[f"C{rows}"].value:
+                print(rows, sheet[f"C{rows}"].value)
+
+        # saving to a file
         # source.save("test.csv")
 
         # accessing one cell
