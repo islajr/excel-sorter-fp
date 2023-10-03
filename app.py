@@ -23,7 +23,7 @@ def main():
     # main loop
     while True:
         while count >= 1:
-            re_prompt = input("Do you want to continue? (y or n) ")
+            re_prompt = input("Do you want to sort for another company? (y/n) ")
 
             re_prompt.strip().lower()
 
@@ -53,14 +53,10 @@ def main():
                     break  # break out of loop
 
             # logic for crossing domains
-            if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is not None:
+            if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 2}"].value is not None:
+                connector.append([])
+                # connector.append(list(sheet[f"C{rows + 1}"].value))
                 # connector.append([])
-                ...
-
-            # accounting for a possible two-line break
-            elif sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is None and sheet[f"C{rows + 2}"].value is not None:
-                # connector.append([])
-                ...
 
             # finding and copying the heading
             if sheet[f"C{rows}"].value is None:
