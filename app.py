@@ -8,7 +8,6 @@
 """
 import openpyxl
 import sys
-import re
 
 
 def main():
@@ -43,14 +42,22 @@ def main():
         # search for pattern in file
         for rows in range(1, 50001):
             # condition for EOF: Three empty lines in a row.
-            if sheet[f"C{rows}"].value is None:  # if the iterator comes on an empty line
-                if sheet[f"C{rows + 1}"] is None:  # check if the next line is also empty
-                    if sheet[f"C{rows + 2}"] is None:  # check if the following line is also empty.
-                        break  # break out of loop
+            if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is None:  # if the iterator comes on
+                # two empty lines
+                if sheet[f"C{rows + 2}"].value is None:  # check if the following line is also empty.
+                    break  # break out of loop
 
+            # logic for crossing domains
+            if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is not None:
+                print(sheet[f"C{rows + 1}"].value)
+
+            # accounting for a possible two-line break
+            elif sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is None and sheet[f"C{rows + 2}"].value is not None:
+                print(sheet[f"C{rows + 1}"].value)
             #   logic for grepping pattern
-            if pattern in sheet[f"C{rows}"].value:
-                print(rows, sheet[f"C{rows}"].value)
+            else:
+                if pattern in sheet[f"C{rows}"].value:
+                    print(rows, sheet[f"C{rows}"].value)
 
         # saving to a file
         # source.save("test.csv")
