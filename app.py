@@ -17,6 +17,9 @@ def main():
     source = openpyxl.load_workbook("./src/S4 BALANCES FOR THE MONTH ENDED 30.09.2023.xlsx")
     sheet = source.active
 
+    connector = []
+    current_list = []
+
     # main loop
     while True:
         while count >= 1:
@@ -38,9 +41,11 @@ def main():
 
         # input validation
         pattern.strip().capitalize()
+        new_book = openpyxl.Workbook()
+        new_sheet = new_book.active
 
         # search for pattern in file
-        for rows in range(1, 50001):
+        for rows in range(1, 10001):
             # condition for EOF: Three empty lines in a row.
             if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is None:  # if the iterator comes on
                 # two empty lines
@@ -52,12 +57,34 @@ def main():
                 print(sheet[f"C{rows + 1}"].value)
 
             # accounting for a possible two-line break
-            elif sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is None and sheet[f"C{rows + 2}"].value is not None:
-                print(sheet[f"C{rows + 1}"].value)
-            #   logic for grepping pattern
-            else:
-                if pattern in sheet[f"C{rows}"].value:
-                    print(rows, sheet[f"C{rows}"].value)
+            elif sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is None and sheet[
+                f"C{rows + 2}"].value is not None:
+                print(sheet[f"C{rows + 2}"].value)
+
+            # finding and copying the heading
+            if sheet[f"C{rows}"].value is None:
+                ...
+            elif "Participant" in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
+                current = list(sheet[rows])
+                for i in current:
+                    current_list.append(i.value)
+                connector.append(current_list)
+                current_list.clear()
+
+            # logic for grepping pattern
+            if pattern in sheet[f"C{rows}"].value is None:
+                ...
+            elif pattern in sheet[f"C{rows}"].value:
+                current = list(sheet[rows])
+                for i in current:
+                    current_list.append(i.value)
+                connector.append(current_list)
+                current_list.clear()
+
+        # writing from list to file
+        print(connector)
+
+        new_book.save(f"./output/{pattern}.xlsx")
 
         # saving to a file
         # source.save("test.csv")
