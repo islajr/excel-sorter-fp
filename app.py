@@ -53,10 +53,11 @@ def main():
                     break  # break out of loop
 
             # logic for crossing domains
-            if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 2}"].value is not None:
-                connector.append([])
-                # connector.append(list(sheet[f"C{rows + 1}"].value))
-                # connector.append([])
+            # if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 2}"].value is not None:
+            #     # connector.append([])
+            #     # connector.append(list(sheet[f"C{rows + 1}"].value))
+            #     # connector.append([])
+            #     ...
 
             # finding and copying the heading
             if sheet[f"C{rows}"].value is None:
@@ -88,7 +89,8 @@ def main():
 
         # writing to new file from storage
         for i in connector:
-            new_sheet.append(i)
+            print(i)
+            new_sheet.append(i)  # new worksheet uses just as many columns as required.
 
         new_book.save(f"./output/{pattern}.xlsx")
 
