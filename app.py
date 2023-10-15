@@ -87,14 +87,18 @@ def main():
                     connector[len(connector) - 1].append(i)
                 current_list.clear()
 
-        # writing to new file from storage
-        for i in connector:
-            print(i)
-            new_sheet.append(i)  # new worksheet uses just as many columns as required.
+        # error checking for final step
+        if len(connector) < 2:
+            print("{} not found!".format(pattern))
+        else:
+            # writing to new file from storage
+            for i in connector:
+                new_sheet.append(i)  # new worksheet uses just as many columns as required.
 
-        new_book.save(f"./output/{pattern}.xlsx")
+            new_book.save(f"./output/{pattern}.xlsx")
+            print("Successfully sorted {}".format(pattern))
 
-        count = count + 1
+        count += 1
 
 
 if __name__ == "__main__":
