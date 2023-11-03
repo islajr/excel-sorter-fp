@@ -40,15 +40,14 @@ def main():
         pattern = input("What do you wish to sort? ")
 
         # input validation
-        pattern.strip().capitalize()
+        pattern.strip().capitalize()    # note: add support for fuzzy search and combinatory integration.
         new_book = openpyxl.Workbook()
         new_sheet = new_book.active
 
         # search for pattern in file and store them
         for rows in range(1, 10001):
-            # condition for EOF: Three empty lines in a row.
-            if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is None:  # if the iterator comes on
-                # two empty lines
+            # condition for EOF: Three consecutive empty lines
+            if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is None:  # if the iterator comes on two empty lines
                 if sheet[f"C{rows + 2}"].value is None:  # check if the following line is also empty.
                     break  # break out of loop
 
@@ -60,9 +59,7 @@ def main():
             #     ...
 
             # finding and copying the heading
-            if sheet[f"C{rows}"].value is None:
-                ...
-            elif "Participant" in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
+            if "Participant" in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
                 current = list(sheet[rows])
                 for i in current:
                     current_list.append(i.value)
