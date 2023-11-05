@@ -41,6 +41,8 @@ def main():
 
         # input validation
         pattern.strip().capitalize()    # note: add support for fuzzy search and combinatory integration.
+        # if 
+            
         new_book = openpyxl.Workbook()
         new_sheet = new_book.active
 
@@ -71,7 +73,7 @@ def main():
                 current_list.clear()
 
             # logic for grepping pattern
-            if sheet[f"C{rows}"].value is None:
+            if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is not None:
                 continue
             elif pattern in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
                 current = list(sheet[rows])
@@ -91,7 +93,7 @@ def main():
             # writing to new file from storage
             for i in connector:
                 new_sheet.append(i)  # new worksheet uses just as many columns as required.
-
+                
             new_book.save(f"./output/{pattern}.xlsx")
             print("Successfully sorted {}".format(pattern))
             print("Path to sorted file is output/{}.xlsx".format(pattern))
