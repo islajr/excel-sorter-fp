@@ -41,7 +41,7 @@ def main():
 
         # input validation
         pattern.strip().capitalize()    # note: add support for fuzzy search and combinatory integration.
-        # if 
+        
             
         new_book = openpyxl.Workbook()
         new_sheet = new_book.active
