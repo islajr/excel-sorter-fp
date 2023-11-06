@@ -14,7 +14,7 @@ def main():
     count = 0
 
     # load a workbook
-    source = openpyxl.load_workbook("./src/")   # input relative path to workbook
+    source = openpyxl.load_workbook("./src/BALANCES 31.10.2023.xlsx")   # input relative path to workbook
     sheet = source.active
 
     connector = []
@@ -89,6 +89,7 @@ def main():
         # error checking for final step
         if len(connector) < 2:
             print("{} not found!".format(pattern))
+            connector.clear()
         else:
             # writing to new file from storage
             for i in connector:
