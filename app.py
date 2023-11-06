@@ -98,6 +98,7 @@ def main():
             new_book.save(f"./output/{pattern}.xlsx")
             print("Successfully sorted {}".format(pattern))
             print("Path to sorted file is output/{}.xlsx".format(pattern))
+            connector.clear()
 
         count += 1
 
