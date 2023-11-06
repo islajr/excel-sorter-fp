@@ -14,7 +14,7 @@ def main():
     count = 0
 
     # load a workbook
-    source = openpyxl.load_workbook("./src/BALANCES 31.10.2023.xlsx")
+    source = openpyxl.load_workbook("./src/BALANCES 31.10.2023.xlsx")   # input relative path to workbook
     sheet = source.active
 
     connector = []
