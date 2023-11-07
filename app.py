@@ -8,7 +8,7 @@
 """
 import openpyxl
 import sys
-from openpyxl.styles import cell_style
+from openpyxl.styles import cell_style, Font
 
 
 def style(file):
@@ -19,7 +19,10 @@ def style(file):
     # applying a fixed width to each prescribed width to every column
     for rows in range(1, 10001):
         if sheet[f"A{rows}"].value is not None:
-            ...
+            # font = Font(bold=True)
+            # width = cell_style(width=)
+            cell = sheet[f"A{rows}"].value
+            cell.font = Font(bold=True)
         else:
             break
 
@@ -112,8 +115,14 @@ def main():
             print("Successfully sorted {}".format(pattern))
             print("Path to sorted file is output/{}.xlsx".format(pattern))
             connector.clear()
-            file = f"./output/{pattern}.xlsx"
-            style(file)
+            
+            # formatting 
+            try:
+                file = f"./output/{pattern}.xlsx"
+                style(file)
+            
+            except AttributeError:
+                print(f"Couldn't adequately format {pattern}.xlsx")
 
         count += 1
 
