@@ -17,14 +17,7 @@ def style(file):
     sheet = source.active
     
     # applying a fixed width to each prescribed width to every column
-    for rows in range(1, 10001):
-        if sheet[f"A{rows}"].value is not None:
-            # font = Font(bold=True)
-            # width = cell_style(width=)
-            cell = sheet[f"A{rows}"].value
-            cell.font = Font(bold=True)
-        else:
-            break
+    sheet.row_dimensions[1].font = Font(bold=True)
 
 def main():
     count = 0
@@ -122,7 +115,7 @@ def main():
                 style(file)
             
             except AttributeError:
-                print(f"Couldn't adequately format {pattern}.xlsx")
+                print(f"Couldn't format {pattern}.xlsx")
 
         count += 1
 
