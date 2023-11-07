@@ -4,11 +4,19 @@
 - search for occurrences in source file
 - copy entire row of occurrence to new file
 - when done, ask for input again
-- repeat process on new sheet.
+- repeat process on new sheet. 
 """
 import openpyxl
 import sys
 
+
+def style(file):
+    """ applies the normal styling to cells in the provided file (path)"""
+    source = openpyxl.load_workbook(file)
+    sheet = source.active
+    
+    # applying a fixed width to each prescribed width to every column
+    
 
 def main():
     count = 0
@@ -99,6 +107,8 @@ def main():
             print("Successfully sorted {}".format(pattern))
             print("Path to sorted file is output/{}.xlsx".format(pattern))
             connector.clear()
+            file = f"./output/pattern.xlsx"
+            # style(file)
 
         count += 1
 
