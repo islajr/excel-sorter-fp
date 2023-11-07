@@ -8,6 +8,7 @@
 """
 import openpyxl
 import sys
+from openpyxl.styles import cell_style
 
 
 def style(file):
@@ -16,7 +17,11 @@ def style(file):
     sheet = source.active
     
     # applying a fixed width to each prescribed width to every column
-    
+    for rows in range(1, 10001):
+        if sheet[f"A{rows}"].value is not None:
+            ...
+        else:
+            break
 
 def main():
     count = 0
@@ -107,8 +112,8 @@ def main():
             print("Successfully sorted {}".format(pattern))
             print("Path to sorted file is output/{}.xlsx".format(pattern))
             connector.clear()
-            file = f"./output/pattern.xlsx"
-            # style(file)
+            file = f"./output/{pattern}.xlsx"
+            style(file)
 
         count += 1
 
