@@ -23,7 +23,7 @@ def main():
     count = 0
 
     # load a workbook
-    source = openpyxl.load_workbook("./src/BALANCES 31.10.2023.xlsx")   # input relative path to workbook
+    source = openpyxl.load_workbook("./src/BALANCES 30.11.2023.xlsx")   # input relative path to workbook
     sheet = source.active
 
     connector = []
