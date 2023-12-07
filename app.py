@@ -18,7 +18,21 @@ def style(file):
     
     # applying a fixed width to each prescribed width to every column
     sheet.row_dimensions[1].font = Font(bold=True)
+    
 
+def match(pattern):
+    population = ["Aiico", "FPML", "NLPC", "Access", "African Alliance", "APT", "ARM", "Assurance Annunity", "AXA", "CornerStone", "Coronation Life", "CPL", "Crusader", "Fidelity", "Great Nigeria", "IPML", "Leadway", "Niger Insurance", "Norrenberger", "NPF", "NUPEMCO", "OAK", "PAL", "PPL", "Radix", "SNCPFA", "Trust", "Veritas"]
+    
+    for i in range(0, len(population)):
+        if pattern == population[i]:
+            return population[i]
+        elif pattern.capitalize == population[i]:
+            return population[i]
+        elif pattern.upper == population[i]:
+            return population[i]
+        elif pattern.lower == population[i]:
+            return population[i]
+    
 def main():
     count = 0
 
@@ -49,8 +63,9 @@ def main():
         pattern = input("What do you wish to sort? ")
 
         # input validation
-        pattern.strip().capitalize()    # note: add support for fuzzy search and combinatory integration.
-        
+        pattern.strip()    # note: add support for fuzzy search and combinatory integration.
+        pattern = match(pattern)
+        print(type(pattern))    
             
         new_book = openpyxl.Workbook()
         new_sheet = new_book.active
@@ -109,7 +124,7 @@ def main():
             print("Path to sorted file is output/{}.xlsx".format(pattern))
             connector.clear()
             
-            # formatting 
+            # formatting and error checking
             try:
                 file = f"./output/{pattern}.xlsx"
                 style(file)
