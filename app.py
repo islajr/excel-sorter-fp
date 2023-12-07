@@ -26,11 +26,11 @@ def match(pattern):
     for i in range(0, len(population)):
         if pattern == population[i]:
             return population[i]
-        elif pattern.capitalize == population[i]:
+        elif pattern.capitalize() == population[i]:
             return population[i]
         elif pattern.upper == population[i]:
             return population[i]
-        elif pattern.lower == population[i]:
+        elif pattern.lower is population[i]:
             return population[i]
     
 def main():
@@ -65,7 +65,7 @@ def main():
         # input validation
         pattern.strip()    # note: add support for fuzzy search and combinatory integration.
         pattern = match(pattern)
-        print(type(pattern))    
+            
             
         new_book = openpyxl.Workbook()
         new_sheet = new_book.active
