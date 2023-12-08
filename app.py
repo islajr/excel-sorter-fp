@@ -105,18 +105,35 @@ def main():
                 current_list.clear()
 
             # logic for grepping pattern
-            if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is not None:
-                continue
-            elif pattern in sheet[f"C{rows}"].value or alt in sheet[f"C{rows}"].value or alt2 in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
-                current = list(sheet[rows])
-                for i in current:
-                    current_list.append(i.value)
+            if pattern != "PPL" or pattern != "Veritas":
+    
+                if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is not None:
+                    continue
+                elif pattern in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
+                    current = list(sheet[rows])
+                    for i in current:
+                        current_list.append(i.value)
 
-                # looping through the current list inorder to append its values independently to the connector
-                connector.append([])  # create an empty list to house the heading
-                for i in current_list:
-                    connector[len(connector) - 1].append(i)
-                current_list.clear()
+                    # looping through the current list inorder to append its values independently to the connector
+                    connector.append([])  # create an empty list to house the heading
+                    for i in current_list:
+                        connector[len(connector) - 1].append(i)
+                    current_list.clear()
+                    
+            else:
+                if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is not None:
+                    continue
+                elif pattern in sheet[f"C{rows}"].value or alt in sheet[f"C{rows}"].value or alt2 in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
+                    current = list(sheet[rows])
+                    for i in current:
+                        current_list.append(i.value)
+
+                    # looping through the current list inorder to append its values independently to the connector
+                    connector.append([])  # create an empty list to house the heading
+                    for i in current_list:
+                        connector[len(connector) - 1].append(i)
+                    current_list.clear()
+                
 
         # error checking for final step
         if len(connector) < 2:
