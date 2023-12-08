@@ -28,9 +28,9 @@ def match(pattern):
             return population[i]
         elif pattern.capitalize() == population[i]:
             return population[i]
-        elif pattern.upper == population[i]:
+        elif pattern.upper() == population[i]:
             return population[i]
-        elif pattern.lower is population[i]:
+        elif pattern.lower() is population[i]:
             return population[i]
     
 def main():
