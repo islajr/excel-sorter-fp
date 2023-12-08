@@ -65,6 +65,13 @@ def main():
         # input validation
         pattern.strip()    # note: add support for fuzzy search and combinatory integration.
         pattern = match(pattern)
+        
+        # special consideration for contingent names
+        if pattern == "PPL":
+            alt = "Prem"
+        elif pattern == "Veritas":
+            alt = "VG"
+        
             
             
         new_book = openpyxl.Workbook()
@@ -99,7 +106,7 @@ def main():
             # logic for grepping pattern
             if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is not None:
                 continue
-            elif pattern in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
+            elif pattern in sheet[f"C{rows}"].value or alt in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
                 current = list(sheet[rows])
                 for i in current:
                     current_list.append(i.value)
