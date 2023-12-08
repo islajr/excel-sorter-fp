@@ -69,6 +69,7 @@ def main():
         # special consideration for contingent names
         if pattern == "PPL":
             alt = "Prem"
+            alt2 = "PREM"
         elif pattern == "Veritas":
             alt = "VG"
         
@@ -106,7 +107,7 @@ def main():
             # logic for grepping pattern
             if sheet[f"C{rows}"].value is None and sheet[f"C{rows + 1}"].value is not None:
                 continue
-            elif pattern in sheet[f"C{rows}"].value or alt in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
+            elif pattern in sheet[f"C{rows}"].value or alt in sheet[f"C{rows}"].value or alt2 in sheet[f"C{rows}"].value and sheet[f"C{rows}"].value is not None:
                 current = list(sheet[rows])
                 for i in current:
                     current_list.append(i.value)
