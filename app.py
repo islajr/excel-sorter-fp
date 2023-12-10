@@ -66,6 +66,10 @@ def main():
         pattern.strip()    # note: add support for fuzzy search and combinatory integration.
         pattern = match(pattern)
         
+        if type(pattern) != str:
+            print("We do not know what that is.\nDo try again later. ")
+            break
+        
         # special consideration for contingent names
         if pattern == "PPL":
             alt = "Prem"
