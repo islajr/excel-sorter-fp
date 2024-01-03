@@ -21,10 +21,10 @@ def style(file):
     
 
 def match(pattern):
-    population = ["Aiico", "FPML", "NLPC", "Access", "African Alliance", "APT", "ARM", "Assurance Annunity", "AXA", "CornerStone", "Coronation Life", "CPL", "Crusader", "Fidelity", "Great Nigeria", "IPML", "Leadway", "Niger Insurance", "Norrenberger", "NPF", "NUPEMCO", "OAK", "PAL", "PPL", "Radix", "SNCPFA", "Trust", "Veritas"]
+    population = ["Aiico", "FPML", "NLPC", "Access", "African Alliance", "APT", "ARM", "GREAT", "Assurance Annunity", "AXA", "Chevron", "CornerStone", "Coronation", "CPL", "Crusader", "Fidelity", "Great Nigeria", "IPML", "Leadway", "Niger Insurance", "Norrenberger", "NPF", "NUPEMCO", "OAK", "PAL", "PPL", "Radix", "SNCPFA", "Trust", "Veritas"]
     
     for i in range(0, len(population)):
-        if pattern == population[i]:
+        if pattern in population[i]:
             return population[i]
         elif pattern.capitalize() == population[i]:
             return population[i]
@@ -37,7 +37,7 @@ def main():
     count = 0
 
     # load a workbook
-    source = openpyxl.load_workbook("./src/BALANCES 30.11.2023.xlsx")   # input relative path to workbook
+    source = openpyxl.load_workbook("./src/BALANCES 29.12.2023.xlsx")   # input relative path to workbook
     sheet = source.active
 
     connector = []
@@ -48,7 +48,7 @@ def main():
         while count >= 1:
             re_prompt = input("Do you want to sort for another company? (y/n) ")
 
-            re_prompt.strip().lower()
+            re_prompt = re_prompt.strip().lower()
 
             if re_prompt == "y" or re_prompt == "yes":
                 break
