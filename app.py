@@ -26,11 +26,11 @@ def match(pattern):
     for i in range(0, len(population)):
         if pattern in population[i]:
             return population[i]
-        elif pattern.capitalize() == population[i]:
+        elif pattern.capitalize() in population[i]:
             return population[i]
-        elif pattern.upper() == population[i]:
+        elif pattern.upper() in population[i]:
             return population[i]
-        elif pattern.lower() is population[i]:
+        elif pattern.lower() in population[i]:
             return population[i]
     
 def main():
